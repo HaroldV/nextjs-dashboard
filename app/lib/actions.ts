@@ -87,3 +87,25 @@ export async function deleteInvoice(id: string) {
 
     revalidatePath('/dashboard/invoices');
 }
+
+export async function triggerDianRpa(formData: FormData) {
+    const data = {
+        startDate: formData.get('startDate'),
+        endDate: formData.get('endDate'),
+        token: formData.get('token'),
+    };
+
+    console.log('Triggering RPA with data:', data);
+
+    // TODO: Connect to actual backend endpoint
+    // await fetch(process.env.RPA_ENDPOINT!, {
+    //     method: 'POST',
+    //     body: JSON.stringify(data),
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${data.token}`
+    //     }
+    // });
+
+    return { message: 'RPA Triggered successfully (Mock)' };
+}
