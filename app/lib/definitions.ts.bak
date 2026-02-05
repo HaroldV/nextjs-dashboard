@@ -86,30 +86,3 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
-
-export interface TaskStatus {
-  id: number;
-  user_id: number;
-  status: string;
-  progress_message: string | null;
-  files_downloaded: number;
-  total_files_to_download: number;
-  progress_percent: number;
-}
-
-export interface DianDocument {
-  id?: number;
-  prefix: string | null;
-  number: string;
-  document_type: string;
-  reception_date: string | null;
-  issue_date: string | null;
-  total_amount: number;
-  issuer_nit: string;
-  receiver_nit: string;
-  receiver_name: string;
-  result?: string;
-  radian_status?: string;
-  file_path_xml?: string;
-  file_path_pdf?: string;
-}

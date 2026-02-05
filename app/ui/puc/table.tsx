@@ -1,30 +1,14 @@
-import { lusitana } from '@/app/ui/fonts';
+import { fetchPucAccounts } from '@/app/lib/data';
 
-// Mock data type for PUC
-type PucItem = {
-    id: string;
-    code: string;
-    description: string;
-    date: string;
-    status: 'active' | 'inactive';
-};
+export default async function PucTable() {
+    const pucAccounts = await fetchPucAccounts();
 
-// Mock data
-const mockPucs: PucItem[] = [
-    { id: '1', code: '1105', description: 'Caja', date: '2023-10-01', status: 'active' },
-    { id: '2', code: '1110', description: 'Bancos', date: '2023-10-02', status: 'active' },
-    { id: '3', code: '1305', description: 'Clientes', date: '2023-10-05', status: 'active' },
-    { id: '4', code: '2205', description: 'Proveedores Nacionales', date: '2023-10-10', status: 'inactive' },
-    { id: '5', code: '4135', description: 'Comercio al por mayor y al por menor', date: '2023-10-15', status: 'active' },
-];
-
-export default function PucTable() {
     return (
         <div className="mt-6 flow-root">
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
                     <div className="md:hidden">
-                        {mockPucs.map((puc) => (
+                        {pucAccounts.map((puc) => (
                             <div key={puc.id} className="mb-2 w-full rounded-md bg-white p-4">
                                 <div className="flex items-center justify-between border-b pb-4">
                                     <div>
@@ -39,7 +23,8 @@ export default function PucTable() {
                                 </div>
                                 <div className="flex w-full items-center justify-between pt-4">
                                     <div>
-                                        <p>{puc.date}</p>
+                                        {/* <p>{puc.date}</p> */}
+                                        {/* Date field logic if needed, backend has created_at */}
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +40,10 @@ export default function PucTable() {
                                     Descripción
                                 </th>
                                 <th scope="col" className="px-3 py-5 font-medium">
-                                    Fecha de Carga
+                                    Nivel
+                                </th>
+                                <th scope="col" className="px-3 py-5 font-medium">
+                                    Tipo
                                 </th>
                                 <th scope="col" className="px-3 py-5 font-medium">
                                     Estado
@@ -63,7 +51,7 @@ export default function PucTable() {
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {mockPucs.map((puc) => (
+                            {pucAccounts.map((puc) => (
                                 <tr
                                     key={puc.id}
                                     className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -75,7 +63,10 @@ export default function PucTable() {
                                         {puc.description}
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-3">
-                                        {puc.date}
+                                        {puc.level}
+                                    </td>
+                                    <td className="whitespace-nowrap px-3 py-3">
+                                        {puc.type}
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-3">
                                         <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${puc.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
@@ -85,6 +76,13 @@ export default function PucTable() {
                                     </td>
                                 </tr>
                             ))}
+                            {pucAccounts.length === 0 && (
+                                <tr>
+                                    <td colSpan={5} className="py-10 text-center text-gray-500">
+                                        No hay cuentas PUC cargadas. Importa un archivo para comenzar.
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

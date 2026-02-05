@@ -7,6 +7,7 @@ import {
   DocumentDuplicateIcon,
   UserIcon,
   BoltIcon,
+  ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -21,9 +22,9 @@ const links = [
     icon: PresentationChartBarIcon
   },
   {
-    name: 'Descarga de Facturas',
+    name: 'Descarga de Facturas DIAN',
     href: '/dashboard/invoicesDian',
-    icon: BoltIcon
+    icon: ArrowDownTrayIcon
   },
   {
     name: 'Facturas de Venta',
@@ -42,13 +43,18 @@ const links = [
   },
   {
     name: 'Carga de PUC',
-    href: '/dashboard/puc',
+    href: '/dashboard/carga-listado-puc',
     icon: DocumentArrowUpIcon
   },
   {
     name: 'Aplicativo Estado de RUT',
     href: '#',
     icon: DocumentDuplicateIcon
+  },
+  {
+    name: 'Reportes AI',
+    href: '/dashboard/reportes-ia',
+    icon: BoltIcon
   }
 ];
 
